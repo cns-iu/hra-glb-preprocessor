@@ -1,8 +1,7 @@
 import argparse
 import subprocess
-import time
 
-start = time.time()
+
 parser = argparse.ArgumentParser(description='Python wrapper for Blender')
 parser.add_argument('input_glb_path', help='input glb file path')
 parser.add_argument('output_glb_path', help='output glb file path')
@@ -15,5 +14,3 @@ cmd = ['blender', '--background', '--python', 'single_organ_preprocess.py', '--'
 
 print(" ".join(cmd))
 subprocess.run(cmd)
-
-print("total running time: ", time.time() - start)
