@@ -1,5 +1,4 @@
 # hra-glb-preprocessor
-Make meshes manifold and filling holes. Generate OFF file for a single mesh from GLB 
 
 **Version:** 1.0.0
 
@@ -7,7 +6,8 @@ Make meshes manifold and filling holes. Generate OFF file for a single mesh from
 
 ## Overview:
 hra-glb-preprocessor project includes:
-1. Preprocess (fix non-manifold meshes and filling holes) 3D models using Blender Python API. 
+1. Preprocess (fix non-manifold meshes and filling holes) 3D models using Blender Python API.
+2. Generate OFF file for a single mesh from GLB if needed. 
 
 ## Installation Instructions
 1. Install Blender
@@ -33,11 +33,16 @@ hra-glb-preprocessor project includes:
         ```
 
 ## Usage 
-
-```bash
-python3 glb_preprocessor.py input_glb_path output_glb_path
-```
-e.g., 
-```bash
-python3 glb_preprocessor.py ../model/3d-vh-f-blood-vasculature.glb ../output/3d-vh-f-blood-vasculature.glb
-```
+1. Change directory to mesh_processing_blender
+   ```bash
+   cd mesh_processing_blender
+   ```
+   
+2. Run glb_preprocessor.py by specifying input_glb_path and output_glb_path  
+    ```bash
+    python3 glb_preprocessor.py input_glb_path output_glb_path
+    ```
+    e.g., 
+    ```bash
+    python3 glb_preprocessor.py ../model/3d-vh-f-blood-vasculature.glb ../output/3d-vh-f-blood-vasculature.glb
+    ```
