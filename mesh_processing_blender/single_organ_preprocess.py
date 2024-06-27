@@ -112,12 +112,11 @@ def mesh_process(file_locations, repair_type, levels, max_tris):
 
     bpy.context.view_layer.objects.active = objs[0]
     
-    print("Create lod models")
+    print("Create preprocessed models")
     levels = sorted(levels.items(), reverse=True)
     prev_level = 100.0
 
     for level, output_filepath in levels:
-        print("Current level: %s" %level)
         ratio = level / prev_level
         prev_level = level
         decimate(ratio)
@@ -203,7 +202,7 @@ def main(repair_type="doubles"):
 
     file_locations = FileLocations(filename, filestem, extension, source_path, output_dir, output_root, hdr)
 
-    #process the files
+    #process the files, levels and max_tris are dictionaries, (key, value) -> (lod, output_filename) or (max_triangle, output_filename)
     mesh_process(file_locations, repair_type, levels, max_tris)
  
 
