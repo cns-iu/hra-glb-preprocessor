@@ -11,24 +11,26 @@ hra-glb-preprocessor project includes:
 
 ## Installation Instructions
 1. Install Blender
-    - Ubuntu: 
-        ```bash
-        sudo snap install blender --classic
-        ```
+    - Ubuntu:
+        1. Please follow instructions at https://docs.blender.org/manual/en/latest/getting_started/installing/linux.html.
+        2. Add blender to path: https://docs.blender.org/manual/en/latest/advanced/command_line/launch/linux.html
     - MacOS:
         1. Please follow instructions at https://docs.blender.org/manual/en/latest/getting_started/installing/macos.html 
         2. Add blender to path: https://docs.blender.org/manual/en/latest/advanced/command_line/launch/macos.html
     - Windows:
         1. Please follow instructions at https://docs.blender.org/manual/en/latest/getting_started/installing/windows.html
-        2. Add blender to path: https://docs.blender.org/manual/en/latest/advanced/command_line/launch/windows.html
+        2. Add blender to path:
+           1. Find the directory where Blender is installed, e.g., [C:\Program Files\Blender Foundation\Blender\blender.exe]()
+           2. Add both [C:\Program Files\Blender Foundation\Blender\blender.exe](), [C:\Program Files\Blender Foundation\Blender]() (Please replace the two paths using your blender installation path) to environment variable. Please see https://www.computerhope.com/issues/ch000549.htm if you are not sure how to add environment variables on Windows.
+           3. Restart the cmd or powershell.
+           4. Test by entering "blender" in cmd. If Blender is started automatically, the environment variables are successfully added.
     
 
 2. Install Pandas in Blender Python
-    - Linux & MacOS 
+    - Linux & MacOS & Windows
         ```bash
         blender --background --python install_package.py
         ```
-    - Windows (to be finished)
 
 ## Usage 
 
