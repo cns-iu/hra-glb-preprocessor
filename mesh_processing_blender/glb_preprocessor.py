@@ -12,5 +12,4 @@ output_glb_path = args.output_glb_path
 
 cmd = ['blender', '--background', '--python', 'single_organ_preprocess.py', '--', '-input_file_path', input_glb_path, '-lod', '100', output_glb_path]
 
-print(" ".join(cmd))
 subprocess.run(cmd)

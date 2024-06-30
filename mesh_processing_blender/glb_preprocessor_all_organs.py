@@ -55,7 +55,7 @@ if __name__ == "__main__":
         description="Download GLB files from CCF API")
     parser.add_argument("--url", type=str,
                         help="URL of the API", default=endpoint)
-    parser.add_argument("--output-folder", type=str,
+    parser.add_argument("--downloaded_dir", type=str,
                         help="Folder to save downloaded GLB files", default="downloaded_organs/")
     parser.add_argument("--output_model_dir", type=str,
                         help="Directory to the preprocessed models", default="all_preprocessed_models/")
@@ -63,11 +63,11 @@ if __name__ == "__main__":
 
     # Download undownloaded models 
     api_url = args.url
-    output_folder = args.output_folder
-    download_model(api_url, output_folder)
+    downloaded_dir = args.downloaded_dir
+    download_model(api_url, downloaded_dir)
 
     # The input model directory is the downloaded model directory
-    input_model_dir = output_folder
+    input_model_dir = downloaded_dir
     output_model_dir = args.output_model_dir
     cmd = ['blender', '--background', '--python', 'all_organs_preprocess.py', '--', '-input_model_dir', input_model_dir, '-output_model_dir', output_model_dir]
 
