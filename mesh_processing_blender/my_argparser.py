@@ -9,6 +9,8 @@ class MyArgParser:
         self.levels = {}
         self.max_triangles = {}
         self.input_file_path = ""
+        self.input_model_dir = ""
+        self.output_model_dir = ""
         self.parse()
 
 
@@ -33,9 +35,14 @@ class MyArgParser:
                     filename = self.argv[index + 2]
                     self.max_triangles[max_triangle] = filename
                     index += 2
-                
+                elif self.argv[index] == '-input_model_dir':
+                    self.input_model_dir = self.argv[index + 1]
+                    index += 1
+                elif self.argv[index] == '-output_model_dir':
+                    self.output_model_dir = self.argv[index + 1]
+                    index += 1
                 index += 1
         except ValueError:
-            print("please check argments!")
+            print("please check arguments!")
 
     
