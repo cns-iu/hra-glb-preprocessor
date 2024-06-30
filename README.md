@@ -52,9 +52,9 @@ hra-glb-preprocessor project includes:
     ```
     There are three arguments:
 
-    - *url* is the endpoint to download all the latest reference organ models; the default value is https://apps.humanatlas.io/api/v1/reference-organs.
-    - *downloaded_dir* is the directory to cache all the models; the default value is downloaded_organs/.
-    - *output_model_dir* is the output diretory to store all the preprocessed models; the default value is all_preprocessed_models/.
+    - **url** is the endpoint to download all the latest reference organ models; the default value is https://apps.humanatlas.io/api/v1/reference-organs.
+    - **downloaded_dir** is the directory to cache all the models; the default value is downloaded_organs/.
+    - **output_model_dir** is the output diretory to store all the preprocessed models; the default value is all_preprocessed_models/.
     
     e.g., 
     ```bash
