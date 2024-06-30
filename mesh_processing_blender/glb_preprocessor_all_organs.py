@@ -4,6 +4,8 @@ import argparse
 import subprocess
 import requests
 
+from glb_parser import glb_parser_all
+
 # Naive Hashing for url
 def convert_url_to_file(url):
     # Replace illegal chars using underscore
@@ -57,8 +59,10 @@ if __name__ == "__main__":
                         help="URL of the API", default=endpoint)
     parser.add_argument("--downloaded_dir", type=str,
                         help="Folder to save downloaded GLB files", default="downloaded_organs/")
-    parser.add_argument("--output_model_dir", type=str,
-                        help="Directory to the preprocessed models", default="all_preprocessed_models/")
+    parser.add_argument("--output_glb_model_dir", type=str,
+                        help="Directory to the preprocessed GLB models", default="all_preprocessed_glb_models/")
+    parser.add_argument("--output_off_model_dir", type=str,
+                        help="Directory to the preprocessed OFF models", default="all_preprocessed_off_models/")
     args, unknown = parser.parse_known_args()
 
     # Download undownloaded models 
@@ -66,10 +70,13 @@ if __name__ == "__main__":
     downloaded_dir = args.downloaded_dir
     download_model(api_url, downloaded_dir)
 
-    # The input model directory is the downloaded model directory
+    # The input_model_directory is the downloaded model directory, the output_model_directory is specified by users.  
     input_model_dir = downloaded_dir
-    output_model_dir = args.output_model_dir
-    cmd = ['blender', '--background', '--python', 'all_organs_preprocess.py', '--', '-input_model_dir', input_model_dir, '-output_model_dir', output_model_dir]
+    output_glb_model_dir = args.output_glb_model_dir
+    cmd1 = ['blender', '--background', '--python', 'all_organs_preprocess.py', '--', '-input_model_dir', input_model_dir, '-output_model_dir', output_glb_model_dir]
+    subprocess.run(cmd1)
 
-    print(" ".join(cmd))
-    subprocess.run(cmd)
+    # Parse GLB models into OFF files
+    output_off_model_dir = args.output_off_model_dir
+    glb_parser_all(output_glb_model_dir, output_off_model_dir)
+
