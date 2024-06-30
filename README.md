@@ -38,11 +38,25 @@ hra-glb-preprocessor project includes:
    cd mesh_processing_blender
    ```
    
-2. Run glb_preprocessor.py by specifying input_glb_path and output_glb_path  
+2. To pre-process a single model, run glb_preprocessor.py by specifying input_glb_path and output_glb_path  
     ```bash
     python3 glb_preprocessor.py input_glb_path output_glb_path
     ```
     e.g., 
     ```bash
     python3 glb_preprocessor.py ../model/3d-vh-f-blood-vasculature.glb ../output/3d-vh-f-blood-vasculature.glb
+    ```
+3. Download and pre-process all organ models
+    ```bash
+    python3 glb_preprocessor_all_organs.py --url url --downloaded_dir downloaded_dir --output_model_dir preprocessed_model_dir
+    ```
+    There are three arguments:
+
+    - *url* is the endpoint to download all the latest reference organ models; the default value is https://apps.humanatlas.io/api/v1/reference-organs.
+    - *downloaded_dir* is the directory to cache all the models; the default value is downloaded_organs/.
+    - *output_model_dir* is the output diretory to store all the preprocessed models; the default value is all_preprocessed_models/.
+    
+    e.g., 
+    ```bash
+    python3 glb_preprocessor_all_organs.py --url https://apps.humanatlas.io/api/v1/reference-organs --downloaded_dir downloaded_folder/ --output_model_dir preprocessed_model_folder/
     ```
