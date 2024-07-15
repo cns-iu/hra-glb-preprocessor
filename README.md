@@ -48,15 +48,16 @@ hra-glb-preprocessor project includes:
     ```
 3. Download and pre-process all organ models
     ```bash
-    python3 glb_preprocessor_all_organs.py --url url --downloaded_dir downloaded_dir --output_model_dir preprocessed_model_dir
+    python3 glb_preprocessor_all_organs.py --url url --downloaded_dir downloaded_dir --output_glb_model_dir preprocessed_glb_model_dir --output_off_model_dir preprocessed_off_model_dir
     ```
     There are three arguments:
 
     - **url** is the endpoint to download all the latest reference organ models; the default value is https://apps.humanatlas.io/api/v1/reference-organs.
     - **downloaded_dir** is the directory to cache all the models; the default value is downloaded_organs/.
-    - **output_model_dir** is the output diretory to store all the preprocessed models; the default value is all_preprocessed_models/.
+    - **output_glb_model_dir** is the output diretory to store all the preprocessed GLB models; the default value is all_preprocessed_glb_models/.
+    - **output_off_model_dir** is the output directory to store all the preprocessed OFF models, which are generated based on the GLB models; the default value is all_preprocessed_off_models.
     
     e.g., 
     ```bash
-    python3 glb_preprocessor_all_organs.py --url https://apps.humanatlas.io/api/v1/reference-organs --downloaded_dir downloaded_folder/ --output_model_dir preprocessed_model_folder/
+    python3 glb_preprocessor_all_organs.py --url https://apps.humanatlas.io/api/v1/reference-organs --downloaded_dir downloaded_folder/ --output_glb_model_dir all_preprocessed_glb_models/ --output_off_model_dir all_preprocessed_off_models/
     ```
