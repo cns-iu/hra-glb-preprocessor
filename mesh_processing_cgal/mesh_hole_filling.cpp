@@ -10,7 +10,8 @@
 #include <vector>
 #include <set>
 
-#include <CGAL/IO/OFF_reader.h>
+// #include <CGAL/IO/OFF_reader.h>
+#include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/orientation.h>
@@ -48,11 +49,10 @@ bool is_small_hole(halfedge_descriptor h, Mesh & mesh,
 // load non-manifold
 void load_non_manifold_mesh(std::string file_path, Mesh &mesh)
 {
-  std::ifstream input(file_path);
   std::vector<Point> points;
   std::vector<std::vector<std::size_t> > polygons;
 
-  if (!input || !CGAL::read_OFF(input, points, polygons) || points.empty())
+  if (!CGAL::IO::read_polygon_soup(file_path, points, polygons) || points.empty())
   {
     std::cerr << "Cannot open file " << std::endl;
     return;
