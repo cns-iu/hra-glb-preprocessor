@@ -60,9 +60,9 @@ if __name__ == "__main__":
     parser.add_argument("--downloaded_dir", type=str,
                         help="Folder to save downloaded GLB files", default="downloaded_organs/")
     parser.add_argument("--output_glb_model_dir", type=str,
-                        help="Directory to the preprocessed GLB models", default="all_preprocessed_glb_models/")
-    parser.add_argument("--output_off_model_dir", type=str,
-                        help="Directory to the preprocessed OFF models", default="all_preprocessed_off_models/")
+                        help="Directory to the preprocessed GLB models", default="../all_preprocessed_glb_models/")
+    # parser.add_argument("--output_off_model_dir", type=str,
+    #                     help="Directory to the preprocessed OFF models", default="all_preprocessed_off_models/")
     args, unknown = parser.parse_known_args()
 
     # Download undownloaded models 
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     cmd1 = ['blender', '--background', '--python', 'all_organs_preprocess.py', '--', '-input_model_dir', input_model_dir, '-output_model_dir', output_glb_model_dir]
     subprocess.run(cmd1)
 
-    # Parse GLB models into OFF files
-    output_off_model_dir = args.output_off_model_dir
-    glb_parser_all(output_glb_model_dir, output_off_model_dir)
+    # # Parse GLB models into OFF files
+    # output_off_model_dir = args.output_off_model_dir
+    # glb_parser_all(output_glb_model_dir, output_off_model_dir)
 
