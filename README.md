@@ -11,6 +11,8 @@ hra-glb-preprocessor project includes:
 
 ![alt text](./images/diagram.jpg)
 ## Installation Instructions
+For Stage 1:
+
 1. Install Blender (**Please install Blender 4.1 or lower**)
     - Ubuntu:
         1. Please follow instructions at https://docs.blender.org/manual/en/latest/getting_started/installing/linux.html.
@@ -32,7 +34,8 @@ hra-glb-preprocessor project includes:
         ```bash
         blender --background --python install_package.py
         ```
-For C++ libraries [1] [2]:
+
+For Stage 2, install C++ libraries and dependencies as well as Python packages:
 
 3. CMake
     ```bash
@@ -70,9 +73,6 @@ For C++ libraries [1] [2]:
     ```bash
     sudo apt-get install libcpprest-dev
     ```
-
-For Python library [3]:
-
 10. pygltflib
     ```bash
     pip install pygltflib
