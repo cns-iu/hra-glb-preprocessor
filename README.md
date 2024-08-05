@@ -9,6 +9,7 @@ hra-glb-preprocessor project includes:
 1. Preprocess (fix non-manifold meshes and filling holes) 3D models using both Blender Python API (Stage 1) and CGAL (Stage 2). There are two options: preprocess one single GLB file or preprocess all the GLB files in one directory;
 2. Generate OFF files for all the GLB files in one directory if needed. 
 
+![alt text](./images/diagram.jpg)
 ## Installation Instructions
 1. Install Blender (**Please install Blender 4.1 or lower**)
     - Ubuntu:
