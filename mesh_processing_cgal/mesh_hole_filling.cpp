@@ -136,7 +136,10 @@ int main(int argc, char* argv[])
   for (fs::directory_entry& organ_path : fs::directory_iterator(body_path)) 
   {
         std::cout << std::endl << organ_path << std::endl;
-        fs::path organ_name = organ_path.path().stem();
+        // fs::path organ_name = organ_path.path().stem();
+        fs::path organ_name = organ_path.path().filename();
+
+        std::cout << "organ name: " << organ_name << std::endl;
         fs::path output_organ_dir = dir / organ_name;
         
         for (fs::directory_entry& AS : fs::directory_iterator(organ_path)) 
