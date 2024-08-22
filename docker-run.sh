@@ -1,5 +1,6 @@
 #!/bin/bash
 # source constants.sh
 
-rm -r dist log.txt
-docker compose run processor | tee log.txt
+rm -rf dist log.txt
+mkdir -p dist
+docker compose run -it processor | tee log.txt
