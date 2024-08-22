@@ -73,7 +73,9 @@ if __name__ == "__main__":
     # The input_model_directory is the downloaded model directory, the output_model_directory is specified by users.  
     input_model_dir = downloaded_dir
     output_glb_model_dir = args.output_glb_model_dir
+
     cmd1 = ['blender', '--background', '--python', 'all_organs_preprocess.py', '--', '-input_model_dir', input_model_dir, '-output_model_dir', output_glb_model_dir]
+    print(' '.join(cmd1))
     subprocess.run(cmd1)
 
     # # Parse GLB models into OFF files

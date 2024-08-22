@@ -1,8 +1,9 @@
-import os
-import json
-import requests
-import subprocess
 import argparse
+import json
+import os
+import subprocess
+
+import requests
 from glb_parser import glb_parser_all
 
 
@@ -10,10 +11,10 @@ from glb_parser import glb_parser_all
 def convert_url_to_file(url):
     # Replace illegal chars using underscore
     illegal_chars = ['/', ':', '@', '&', '*']
-    
+
     for c in illegal_chars:
         url = url.replace(c, '_')
-    
+
     return url
 
 # Get the latest version models
@@ -33,25 +34,22 @@ def download_model(api_url, output_folder):
         glb_url = organ['object']['file']
         file_name = convert_url_to_file(glb_url)
         file_path = os.path.join(output_folder, file_name)
-        
-        # Already downloaded, skip it. 
+
+        # Already downloaded, skip it.
         if os.path.exists(file_path):
             continue
-        
+
         if glb_url:
             glb_response = requests.get(glb_url)
-            
+
             # Download model
             if glb_response.status_code == 200:
                 with open(file_path, "wb") as file:
                     file.write(glb_response.content)
                     print(f"Downloaded {file_name}")
 
+
 if __name__ == "__main__":
-
-    # get data from HRA API endpoint
-    endpoint = "https://apps.humanatlas.io/api/v1/reference-organs"
-
     # Use `argparse` to build URL
     parser = argparse.ArgumentParser(
         description="CGAL Preprocessor for GLB files")
@@ -61,14 +59,10 @@ if __name__ == "__main__":
                         help="Directory to the preprocessed OFF models", default="all_preprocessed_off_models_cgal/")
     args, unknown = parser.parse_known_args()
 
-
     preproceesed_models_stage_1 = args.preproceesed_models_stage_1
-    plain_model_dir = "./temp_plain_off_model_dir"
     output_off_model_dir = args.output_off_model_dir
+    plain_model_dir = output_off_model_dir + "_temp"
+
     glb_parser_all(preproceesed_models_stage_1, plain_model_dir)
 
-
-
-    cmd = ['./build/mesh_hole_filling', plain_model_dir, output_off_model_dir]
-    subprocess.run(cmd)
-    
+    subprocess.run(['mesh_hole_filling', plain_model_dir, output_off_model_dir])

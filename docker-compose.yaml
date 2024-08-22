@@ -1,0 +1,8 @@
+version: '3.9'
+services:
+  processor:
+    build: .
+    volumes:
+      - type: bind
+        source: ./dist
+        target: /usr/src/app/dist

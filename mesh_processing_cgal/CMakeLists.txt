@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 project(MESH_PROCESSING)
 
 set(CMAKE_BUILD_TYPE "Release")
+set(CGAL_DIR "$ENV{CGAL_HOME}")
 
 find_package(CGAL REQUIRED)
 find_package(Eigen3 REQUIRED NO_MODULE)

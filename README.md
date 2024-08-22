@@ -4,6 +4,30 @@
 
 **Release date:** 15 June 2024
 
+## Quick Start
+
+### Via Docker
+
+Install Docker and run `./docker-run.sh`. 
+
+### Via Ubuntu / local unix machine
+
+First install all system packages in [system-packages.txt](./system-packages.txt):
+
+```bash
+sudo apt install `cat system-packages.txt`
+```
+
+Then you can run the pipeline with:
+
+```bash
+./logged-run.sh
+```
+
+### Output
+
+In both cases a `dist` directory will be created that contains the processed off and glb models, plus a `log.txt` with debugging information as needed.
+
 ## Overview:
 hra-glb-preprocessor project includes:
 1. Preprocess (fix non-manifold meshes and filling holes) 3D models using both Blender Python API (Stage 1) and CGAL (Stage 2). There are two options: preprocess one single GLB file or preprocess all the GLB files in one directory;

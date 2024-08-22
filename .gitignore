@@ -2,3 +2,6 @@ __pycache__/
 build/
 downloaded_organs/
 temp_plain_off_model_dir/
+.venv
+dist/
+log.txt
