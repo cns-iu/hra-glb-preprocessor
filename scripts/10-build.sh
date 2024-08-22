@@ -14,4 +14,8 @@ python glb_preprocessor_all_organs.py --downloaded_dir ../dist/original --output
 cd ../mesh_processing_cgal
 python all_organ_preprocessor_cgal.py --preproceesed_models_stage_1 ../dist/glb --output_off_model_dir ../dist/off
 
-rm -rf dist/off_temp
+rm -rf ../dist/off_temp
+
+cd ../dist/off
+zip -r ../off-release.zip *
+chmod a+r -R ../*
