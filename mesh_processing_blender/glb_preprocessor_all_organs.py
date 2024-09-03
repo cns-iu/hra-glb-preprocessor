@@ -4,7 +4,6 @@ import argparse
 import subprocess
 import requests
 
-from glb_parser import glb_parser_all
 
 # Naive Hashing for url
 def convert_url_to_file(url):
@@ -78,7 +77,4 @@ if __name__ == "__main__":
     print(' '.join(cmd1))
     subprocess.run(cmd1)
 
-    # # Parse GLB models into OFF files
-    # output_off_model_dir = args.output_off_model_dir
-    # glb_parser_all(output_glb_model_dir, output_off_model_dir)
 
