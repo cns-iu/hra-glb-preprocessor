@@ -63,10 +63,9 @@ void load_non_manifold_mesh(std::string file_path, Mesh &mesh)
 
 }
 
-
-void mesh_hole_fill_refine_fair(const fs::path &file_path, const fs::path &output_organ_dir)
+// load manifold and non-manifold meshes
+void load_all_meshes(const fs::path &file_path, const fs::path &output_organ_dir)
 {
-
   if (!fs::exists(output_organ_dir)) fs::create_directory(output_organ_dir);
 
   Mesh mesh;
@@ -78,42 +77,65 @@ void mesh_hole_fill_refine_fair(const fs::path &file_path, const fs::path &outpu
     load_non_manifold_mesh(file_path.string(), mesh);
 
   }
-  
-  // Both of these must be positive in order to be considered
-  double max_hole_diam = 100.0;
-  int max_num_hole_edges = 100000000;
-  unsigned int nb_holes = 0;
-  std::vector<halfedge_descriptor> border_cycles;
-  // collect one halfedge per boundary cycle
-  PMP::extract_boundary_cycles(mesh, std::back_inserter(border_cycles));
 
-  std::cout << file_path << std::endl;
-  std::cout <<"is closed before hole filling: " << CGAL::is_closed(mesh) << std::endl;
-  for(halfedge_descriptor h : border_cycles)
-  {
-    if(max_hole_diam > 0 && max_num_hole_edges > 0 &&
-       !is_small_hole(h, mesh, max_hole_diam, max_num_hole_edges))
-      continue;
-    std::vector<face_descriptor>  patch_facets;
-    std::vector<vertex_descriptor> patch_vertices;
-    bool success = std::get<0>(PMP::triangulate_refine_and_fair_hole(mesh,
-                                                                     h,
-                                                                     std::back_inserter(patch_facets),
-                                                                     std::back_inserter(patch_vertices)));
-    // std::cout << "* Number of facets in constructed patch: " << patch_facets.size() << std::endl;
-    // std::cout << "  Number of vertices in constructed patch: " << patch_vertices.size() << std::endl;
-    // std::cout << "  Is fairing successful: " << success << std::endl;
-    ++nb_holes;
-  }
-  std::cout << nb_holes << " holes have been filled" << std::endl;
-  std::cout << "is closed after hole filling: " << CGAL::is_closed(mesh) << std::endl;
+  // output mesh
   fs::path output_file = output_organ_dir / file_path.stem(); 
   std::ofstream out(output_file.string() + ".off");
   out.precision(17);
   out << mesh << std::endl;
-  
 
 }
+
+// void mesh_hole_fill_refine_fair(const fs::path &file_path, const fs::path &output_organ_dir)
+// {
+
+//   if (!fs::exists(output_organ_dir)) fs::create_directory(output_organ_dir);
+
+//   Mesh mesh;
+  
+//   std::ifstream input(file_path.string());
+//   if ( !input || !(input >> mesh) || mesh.is_empty() ) {
+//     std::cerr << file_path << " Not a manifold mesh." << std::endl;
+//     //fix non-manifold meshes
+//     load_non_manifold_mesh(file_path.string(), mesh);
+
+//   }
+  
+//   // Both of these must be positive in order to be considered
+//   double max_hole_diam = 100.0;
+//   int max_num_hole_edges = 100000000;
+//   unsigned int nb_holes = 0;
+//   std::vector<halfedge_descriptor> border_cycles;
+//   // collect one halfedge per boundary cycle
+//   PMP::extract_boundary_cycles(mesh, std::back_inserter(border_cycles));
+
+//   std::cout << file_path << std::endl;
+//   std::cout <<"is closed before hole filling: " << CGAL::is_closed(mesh) << std::endl;
+//   for(halfedge_descriptor h : border_cycles)
+//   {
+//     if(max_hole_diam > 0 && max_num_hole_edges > 0 &&
+//        !is_small_hole(h, mesh, max_hole_diam, max_num_hole_edges))
+//       continue;
+//     std::vector<face_descriptor>  patch_facets;
+//     std::vector<vertex_descriptor> patch_vertices;
+//     bool success = std::get<0>(PMP::triangulate_refine_and_fair_hole(mesh,
+//                                                                      h,
+//                                                                      std::back_inserter(patch_facets),
+//                                                                      std::back_inserter(patch_vertices)));
+//     // std::cout << "* Number of facets in constructed patch: " << patch_facets.size() << std::endl;
+//     // std::cout << "  Number of vertices in constructed patch: " << patch_vertices.size() << std::endl;
+//     // std::cout << "  Is fairing successful: " << success << std::endl;
+//     ++nb_holes;
+//   }
+//   std::cout << nb_holes << " holes have been filled" << std::endl;
+//   std::cout << "is closed after hole filling: " << CGAL::is_closed(mesh) << std::endl;
+//   fs::path output_file = output_organ_dir / file_path.stem(); 
+//   std::ofstream out(output_file.string() + ".off");
+//   out.precision(17);
+//   out << mesh << std::endl;
+  
+
+// }
 
 // Incrementally fill the holes that are no larger than given diameter
 // and with no more than a given number of edges (if specified).
@@ -144,7 +166,8 @@ int main(int argc, char* argv[])
         
         for (fs::directory_entry& AS : fs::directory_iterator(organ_path)) 
         {
-          mesh_hole_fill_refine_fair(AS.path(), output_organ_dir);
+          // mesh_hole_fill_refine_fair(AS.path(), output_organ_dir);
+          load_all_meshes(AS.path(), output_organ_dir);
 
         }
   }
