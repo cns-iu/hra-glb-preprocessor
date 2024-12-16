@@ -5,3 +5,4 @@ temp_plain_off_model_dir/
 .venv
 dist/
 log.txt
+.vscode/
