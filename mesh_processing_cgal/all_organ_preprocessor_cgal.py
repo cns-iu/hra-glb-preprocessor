@@ -8,14 +8,9 @@ from glb_parser import glb_parser_all
 
 
 # Naive Hashing for url
-def convert_url_to_file(url):
-    # Replace illegal chars using underscore
-    illegal_chars = ['/', ':', '@', '&', '*']
-
-    for c in illegal_chars:
-        url = url.replace(c, '_')
-
-    return url
+def convert_url_to_file(glb_url):
+    parts = glb_url.split('/')
+    return next((parts[i + 1] for i, part in enumerate(parts[:-1]) if part == 'ref-organ'), None)
 
 # Get the latest version models
 def download_model(api_url, output_folder):
@@ -32,7 +27,7 @@ def download_model(api_url, output_folder):
     # Get download URLs
     for organ in data:
         glb_url = organ['object']['file']
-        file_name = convert_url_to_file(glb_url)
+        file_name = convert_url_to_file(glb_url) + ".glb"
         file_path = os.path.join(output_folder, file_name)
         
         # Already downloaded, skip it. 
@@ -51,7 +46,7 @@ def download_model(api_url, output_folder):
 
 if __name__ == "__main__":
     # get data from HRA API endpoint
-    endpoint = "https://apps.humanatlas.io/api/v1/reference-organs"
+    endpoint = "https://apps.humanatlas.io/api--staging/v1/reference-organs"
 
     # Use `argparse` to build URL
     parser = argparse.ArgumentParser(
