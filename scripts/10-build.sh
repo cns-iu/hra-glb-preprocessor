@@ -40,4 +40,5 @@ zip -r ../off-release.zip *
 chmod a+r -R ../*
 
 echo aws s3 cp dist/off-release.zip s3://cdn-humanatlas-io/hra-glb-off-releases/hra-glb-off-data.v2.x.zip
+echo aws s3 cp dist/off-release.zip s3://cdn-humanatlas-io/hra-glb-off-releases/hra-glb-off-data.latest.zip
 echo then update hra-tissue-block-annotation, hra-corridor-generation, hra-3d-cell-generation-api
